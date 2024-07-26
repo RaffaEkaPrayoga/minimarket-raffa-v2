@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.cartu {
+  border: solid;
+  background-color: rgb(240, 235, 235);
+  margin: 67.9;
+}
+
+.letakTgl {
+  text-align: right;
+  margin-right: 10;
+}
+
+.struk {
+  text-align: center;
+}
+
+p {
+  font-size: 15;
+  margin-left: 13;
+}
+
+.zkasir {
+  margin-left: 13;
+}
+
+.thSize {
+  font-size: 19;
+}
+
+.tdSize {
+  font-size: 19;
+}
+
+.TrTdSize {
+  font-size: 15;
+}

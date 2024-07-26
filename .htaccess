@@ -1,0 +1,12 @@
+# Langsing Masuk Ke Index untama
+DirectoryIndex app index.php
+
+# Directory Tidak Dapat Dilihat
+Options -Indexes
+
+# Redirect Untuk Directory Yang Tidak Ada
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ app [L]
