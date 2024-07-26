@@ -24,7 +24,7 @@
 <br />
 <div align="center">
   <a href=" https://github.com/RaffaEkaPrayoga/minimarket-raffa-v2.git">
-    <img src="assets/img/keranjang.png" alt="Logo" width="80" height="80">
+    <img src="assets/img/Keranjang.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Minimarket Raffa</h3>
@@ -62,7 +62,7 @@
 
 [![Zkasir][product-screenshot]]()
 
-Zkasir adalah Sistem informasi sederhana yang menggunakan bahasa pemrograman PHP OOP NATIVE
+Minimarket Raffa adalah Sistem informasi sederhana yang menggunakan bahasa pemrograman PHP OOP NATIVE dan menggunakan design patern singleton dalam pembuatannya, sehingga memori yang di pakai menjadi lebih efisien.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
