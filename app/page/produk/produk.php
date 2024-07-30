@@ -124,14 +124,72 @@ if (isset($_GET['id'])) {
             </div>
         </div>
     </div>
+</div>
+</div>
 
-    <!-- Modal Tambah Produk -->
-    <div class="modal fade" id="addproduk" tabindex="-1" role="dialog" aria-labelledby="ModalTittle" aria-hidden="true" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);">
+<!-- Modal Tambah Produk -->
+<div class="modal fade" id="addproduk" tabindex="-1" role="dialog" aria-labelledby="ModalTittle" aria-hidden="true" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalTittle"><i class="fa fa-shopping-bag mr-1 text-muted"></i> Tambah Produk</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-2">
+                        <label>Kode Produk :</label>
+                        <input type="text" name="kode_produk" class="form-control" value="<?php echo htmlspecialchars($kodeProduk); ?>" readonly>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Nama Produk :</label>
+                        <input type="text" name="nama_produk" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Kategori Produk :</label>
+                        <select name="idkategori" class="form-control" required>
+                            <option value="" selected>-- Pilih Kategori --</option>
+                            <?php
+                            $dataK = $produk->getKategori();
+                            foreach ($dataK as $dk) {
+                            ?>
+                                <option value="<?php echo htmlspecialchars($dk['idkategori']) ?>"><?php echo htmlspecialchars($dk['nama_kategori']) ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Stock :</label>
+                        <input type="number" name="stock" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Harga Modal :</label>
+                        <input type="number" name="harga_modal" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Harga Jual :</label>
+                        <input type="number" name="harga_jual" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="tambahProduk" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Produk -->
+<?php foreach ($produkData as $d) { ?>
+    <div class="modal fade" id="editP<?php echo htmlspecialchars($d['idproduk']) ?>" tabindex="-1" role="dialog" aria-labelledby="ModalTittle" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form method="post">
+                    <input type="hidden" name="idproduk" value="<?php echo htmlspecialchars($d['idproduk']) ?>">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ModalTittle"><i class="fa fa-shopping-bag mr-1 text-muted"></i> Tambah Produk</h5>
+                        <h5 class="modal-title" id="ModalTittle"><i class="fa fa-edit mr-1 text-muted"></i> Edit Produk</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -139,11 +197,11 @@ if (isset($_GET['id'])) {
                     <div class="modal-body">
                         <div class="form-group mb-2">
                             <label>Kode Produk :</label>
-                            <input type="text" name="kode_produk" class="form-control" value="<?php echo htmlspecialchars($kodeProduk); ?>" readonly>
+                            <input type="text" name="kode_produk" class="form-control" value="<?php echo htmlspecialchars($d['kode_produk']) ?>" readonly>
                         </div>
                         <div class="form-group mb-2">
                             <label>Nama Produk :</label>
-                            <input type="text" name="nama_produk" class="form-control" required>
+                            <input type="text" name="nama_produk" class="form-control" value="<?php echo htmlspecialchars($d['nama_produk']) ?>" required>
                         </div>
                         <div class="form-group mb-2">
                             <label>Kategori Produk :</label>
@@ -153,94 +211,68 @@ if (isset($_GET['id'])) {
                                 $dataK = $produk->getKategori();
                                 foreach ($dataK as $dk) {
                                 ?>
-                                    <option value="<?php echo htmlspecialchars($dk['idkategori']) ?>"><?php echo htmlspecialchars($dk['nama_kategori']) ?></option>
+                                    <option value="<?php echo htmlspecialchars($dk['idkategori']) ?>" <?php echo ($dk['idkategori'] == $d['idkategori']) ? 'selected' : '' ?>><?php echo htmlspecialchars($dk['nama_kategori']) ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="form-group mb-2">
                             <label>Stock :</label>
-                            <input type="number" name="stock" class="form-control" required>
+                            <input type="number" name="stock" class="form-control" value="<?php echo htmlspecialchars($d['stock']) ?>" required>
                         </div>
                         <div class="form-group mb-2">
                             <label>Harga Modal :</label>
-                            <input type="number" name="harga_modal" class="form-control" required>
+                            <input type="number" name="harga_modal" class="form-control" value="<?php echo htmlspecialchars($d['harga_modal']) ?>" required>
                         </div>
                         <div class="form-group mb-2">
                             <label>Harga Jual :</label>
-                            <input type="number" name="harga_jual" class="form-control" required>
+                            <input type="number" name="harga_jual" class="form-control" value="<?php echo htmlspecialchars($d['harga_jual']) ?>" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" name="tambahProduk" class="btn btn-primary">Simpan</button>
+                        <button type="submit" name="updateProduk" class="btn btn-primary">Simpan</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <!-- Modal Edit Produk -->
-    <?php foreach ($produkData as $d) { ?>
-        <div class="modal fade" id="editP<?php echo htmlspecialchars($d['idproduk']) ?>" tabindex="-1" role="dialog" aria-labelledby="ModalTittle" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form method="post">
-                        <input type="hidden" name="idproduk" value="<?php echo htmlspecialchars($d['idproduk']) ?>">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalTittle"><i class="fa fa-edit mr-1 text-muted"></i> Edit Produk</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group mb-2">
-                                <label>Kode Produk :</label>
-                                <input type="text" name="kode_produk" class="form-control" value="<?php echo htmlspecialchars($d['kode_produk']) ?>" readonly>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label>Nama Produk :</label>
-                                <input type="text" name="nama_produk" class="form-control" value="<?php echo htmlspecialchars($d['nama_produk']) ?>" required>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label>Kategori Produk :</label>
-                                <select name="idkategori" class="form-control" required>
-                                    <option value="" selected>-- Pilih Kategori --</option>
-                                    <?php
-                                    $dataK = $produk->getKategori();
-                                    foreach ($dataK as $dk) {
-                                    ?>
-                                        <option value="<?php echo htmlspecialchars($dk['idkategori']) ?>" <?php echo ($dk['idkategori'] == $d['idkategori']) ? 'selected' : '' ?>><?php echo htmlspecialchars($dk['nama_kategori']) ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label>Stock :</label>
-                                <input type="number" name="stock" class="form-control" value="<?php echo htmlspecialchars($d['stock']) ?>" required>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label>Harga Modal :</label>
-                                <input type="number" name="harga_modal" class="form-control" value="<?php echo htmlspecialchars($d['harga_modal']) ?>" required>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label>Harga Jual :</label>
-                                <input type="number" name="harga_jual" class="form-control" value="<?php echo htmlspecialchars($d['harga_jual']) ?>" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="updateProduk" class="btn btn-primary">Simpan</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
+<?php } ?>
 </div>
+
 
 <script>
     function hapus_produk(id) {
-        if (confirm('Yakin ingin menghapus produk ini?')) {
-            window.location.href = 'index.php?page=produk&id=' + id;
-        }
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-primary mx-4',
+                cancelButton: 'btn btn-danger mx-4'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Hapus Data Pembelian',
+            text: "Data kamu nggak bisa kembali lagi!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, menghapus !',
+            cancelButtonText: 'Tidak, batal !',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Hapus!',
+                    'File kamu telah dihapus.',
+                    'success'
+                )
+                window.location.href = 'index.php?page=produk&id=' + id;
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Batal',
+                    'File kamu masih aman :)',
+                    'error'
+                )
+            }
+        })
     }
 </script>
