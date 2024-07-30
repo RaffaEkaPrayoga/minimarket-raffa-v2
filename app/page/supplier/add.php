@@ -23,9 +23,9 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-<div class="main-content">
-  <section class="section">
-    <div class="section-header">
+<div class="main-content" style="padding-left: 0px; padding-right:0;">
+  <div class="section">
+    <div class="section-header" style="margin-left:0px; margin-right:0px; border-radius: 10px;">
       <h1>Supplier</h1>
       <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="index.php?page=supplier">Supplier</a></div>
@@ -62,5 +62,5 @@ if (isset($_POST["submit"])) {
           </div>
         </div>
       </div>
-  </section>
-</div>
+      </section>
+    </div>
