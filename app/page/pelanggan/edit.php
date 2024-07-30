@@ -32,39 +32,41 @@ if ($id_pelanggan) {
 }
 ?>
 
-<div class="section-header">
-   <h1>Pelanggan</h1>
-</div>
-
-<div class="row">
-   <div class="col-12 col-md-6 col-lg-8">
-      <div class="card">
-         <form method="post">
-            <div class="card-header">
-               <h4>Edit Pelanggan</h4>
-            </div>
-            <div class="card-body">
-               <div class="row">
-                  <div class="form-group col-md-6">
-                     <label>Nama</label>
-                     <input type="text" autocomplete="off" class="form-control" name="nama_pelanggan" value="<?php echo isset($nama_pelanggan) ? $nama_pelanggan : ''; ?>">
-                  </div>
-                  <div class="form-group col-md-6">
-                     <label>Alamat Pelanggan</label>
-                     <input type="text" autocomplete="off" class="form-control" name="alamat_pelanggan" value="<?php echo isset($alamat_pelanggan) ? $alamat_pelanggan : ''; ?>">
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="form-group col-md-6">
-                     <label>Nomor Telepon</label>
-                     <input type="text" autocomplete="off" class="form-control" name="telepon_pelanggan" value="<?php echo isset($telepon_pelanggan) ? $telepon_pelanggan : ''; ?>">
-                  </div>
-               </div>
-               <div class="form-group">
-                  <button class="btn btn-primary btn-lg btn-block" type="submit" name="edit">Edit</button>
-               </div>
-            </div>
-         </form>
+<div class="main-content" style="padding-left: 0px; padding-right:0;">
+   <div class="section">
+      <div class="section-header" style="margin-left:0px; margin-right:0px; border-radius: 10px;">
+         <h1>Pelanggan</h1>
       </div>
-   </div>
-</div>
+
+      <div class="row">
+         <div class="col-12 col-md-6 col-lg-8">
+            <div class="card">
+               <form method="post">
+                  <div class="card-header">
+                     <h4>Edit Pelanggan</h4>
+                  </div>
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="form-group col-md-6">
+                           <label>Nama</label>
+                           <input type="text" autocomplete="off" class="form-control" name="nama_pelanggan" value="<?php echo isset($nama_pelanggan) ? $nama_pelanggan : ''; ?>">
+                        </div>
+                        <div class="form-group col-md-6">
+                           <label>Alamat Pelanggan</label>
+                           <input type="text" autocomplete="off" class="form-control" name="alamat_pelanggan" value="<?php echo isset($alamat_pelanggan) ? $alamat_pelanggan : ''; ?>">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group col-md-6">
+                           <label>Nomor Telepon</label>
+                           <input type="text" autocomplete="off" class="form-control" name="telepon_pelanggan" value="<?php echo isset($telepon_pelanggan) ? $telepon_pelanggan : ''; ?>">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="edit">Edit</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
