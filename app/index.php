@@ -24,9 +24,7 @@ if (!$user->isLoggedIn() && $user->isLoggedIn() == false) {
     $cetak = isset($_GET['cetak']) ? $_GET['cetak'] : 'cetak';
     switch ($cetak) {
         case 'struk':
-            include 'page/cetak/cetak.php';
-        case 'transaksi':
-            include 'page/transaksi/report.php';
+            include 'page/laporan/print-laporan.php';
     }
 ?>
     <!DOCTYPE html>
@@ -81,13 +79,17 @@ if (!$user->isLoggedIn() && $user->isLoggedIn() == false) {
                         case 'supplier':
                             include('page/supplier/default.php');
                             break;
-
-                        case 'transaksi':
-                            include('page/transaksi/default.php');
+                            
+                        case 'pembelian':
+                            include('page/pembelian/default.php');
                             break;
 
-                        case 'struk':
-                            include('page/cetak/default.php');
+                        case 'transaksi':
+                            include('page/transaksi/transaksi.php');
+                            break;
+
+                        case 'laporan':
+                            include('page/laporan/default.php');
                             break;
 
                         case 'dashboard':
