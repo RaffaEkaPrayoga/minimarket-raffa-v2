@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (isset($_GET['hapus'])) {
     $idKategori = htmlspecialchars($_GET['hapus']);
     $kategori->hapusKategori($idKategori);
-    echo "<script>window.location = 'index.php?page=kategori&alert=success3';</script>";
+    echo "<script>window.location = 'index.php?page=kategori&alert=hapus';</script>";
     exit();
 }
 
