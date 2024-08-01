@@ -1,5 +1,5 @@
-# Langsing Masuk Ke Index untama
-DirectoryIndex app index.php
+# Langsung Masuk Ke Index Utama
+DirectoryIndex app/index.php
 
 # Directory Tidak Dapat Dilihat
 Options -Indexes
@@ -9,4 +9,16 @@ Options +FollowSymLinks
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ app [L]
+RewriteRule ^ app/ [L]
+
+    # Blokir akses langsung ke file .php
+    <FilesMatch "\.php$">
+        Order Allow,Deny
+        Deny from all
+    </FilesMatch>
+
+    # Mengizinkan akses ke index.php
+    <Files "index.php">
+        Order Allow,Deny
+        Allow from all
+    </Files>
