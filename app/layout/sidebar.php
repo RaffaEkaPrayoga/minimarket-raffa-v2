@@ -19,12 +19,36 @@
                 <?php } ?>
                 <a href="index.php?page=dashboard"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 </li>
-                <?php
-                if ($currentUser['level'] === 1) {
+                <li class="menu-header">Transaksi</li>
+                <?php if ($nav === 'transaksi') {
                 ?>
-                    <!-- <li class="menu-header">User</li> -->
-                    <?php if ($nav === 'user') {
+                    <li class="dropdown active ">
+                    <?php } else { ?>
+                    <li class="dropdown ">
+                    <?php } ?>
+                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i><span>Transaksi</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="index.php?page=transaksi">Transaksi</a></li>
+                    </ul>
+
+                    <li class="menu-header">Laporan</li>
+                    <?php if ($nav === 'laporan') {
                     ?>
+                        <li class="dropdown active ">
+                        <?php } else { ?>
+                        <li class="dropdown ">
+                        <?php } ?>
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span>Laporan</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="index.php?page=laporan">Laporan</a></li>
+                            <!-- <li><a class="nav-link" href="index.php?page=laporan&act=create">Buat laporan</a></li> -->
+                        </ul>
+                        <?php
+                        if ($currentUser['level'] === 1) {
+                        ?>
+                            <!-- <li class="menu-header">User</li> -->
+                            <?php if ($nav === 'user') {
+                            ?>
                         <li class="dropdown active ">
                         <?php } else { ?>
                         <li class="dropdown ">
@@ -36,8 +60,8 @@
                         </ul>
                         </li>
                     <?php } elseif ($currentUser['level'] === 2) {
-                    echo "<script>window.location.href = 'index.php </script>";
-                } ?>
+                            echo "<script>window.location.href = 'index.php </script>";
+                        } ?>
                     <li class="menu-header">Pelanggan</li>
                     <?php if ($nav === 'pelanggan') {
                     ?>
@@ -81,7 +105,7 @@
                                 <?php } else { ?>
                                 <li class="dropdown ">
                                 <?php } ?>
-                                <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i></i><span>Supplier</span></a>
+                                <a href="#" class="nav-link has-dropdown"><i class="fas fa-columns"></i></i><span>Supplier</span></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="index.php?page=supplier">Supplier</a></li>
                                 </ul>
@@ -91,37 +115,11 @@
                                 <?php } else { ?>
                                 <li class="dropdown ">
                                 <?php } ?>
-                                <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-basket"></i><span>Pembelian</span></a>
+                                <a href="#" class="nav-link has-dropdown"><i class="fas fa-square"></i><span>Pembelian</span></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="index.php?page=pembelian">Pembelian</a></li>
                                     <!-- <li><a class="nav-link" href="index.php?page=pembelian&act=create">Tambah pembelian</a></li> -->
                                 </ul>
-
-
-                                <li class="menu-header">Transaksi</li>
-                                <?php if ($nav === 'transaksi') {
-                                ?>
-                                <li class="dropdown active ">
-                                <?php } else { ?>
-                                <li class="dropdown ">
-                                <?php } ?>
-                                <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i><span>Transaksi</span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="index.php?page=transaksi">Transaksi</a></li>
-                                </ul>
-
-                                <li class="menu-header">Laporan</li>
-                                <?php if ($nav === 'laporan') {
-                                ?>
-                                    <li class="dropdown active ">
-                                    <?php } else { ?>
-                                    <li class="dropdown ">
-                                    <?php } ?>
-                                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i><span>Laporan</span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="nav-link" href="index.php?page=laporan">Laporan</a></li>
-                                        <!-- <li><a class="nav-link" href="index.php?page=laporan&act=create">Buat laporan</a></li> -->
-                                    </ul>
         </ul>
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="https://instagram.com/raffaekaprayoga" target="_blank" class="btn btn-primary btn-lg btn-block btn-icon-split">
