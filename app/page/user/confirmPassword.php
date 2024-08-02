@@ -2,60 +2,70 @@
 $pdo = Koneksi::connect();
 $crudUser = user::getInstance($pdo);
 
-$id_user = $_GET["id"];
+$id_user = htmlspecialchars($_GET["id"]);
 
 if (isset($_POST["confirm"])) {
     $password = htmlspecialchars($_POST["password"]);
 
-    if ($crudUser->confirmPassword($id_user, $password)) {
-?>
-        <script>
-            window.location.href = "index.php?page=user&act=change-Password&id=<?= $id_user ?>";
-        </script>
-<?php
+    if (empty($password)) {
+        // Jika password kosong, arahkan dengan parameter alert=err1
+        echo "<script>
+            window.location.href = 'index.php?page=user&act=confirm-Password&id=" . htmlspecialchars($id_user) . "&alert=err1';
+        </script>";
+    } else if ($crudUser->confirmPassword($id_user, $password)) {
+        // Jika password benar, set session dan arahkan ke halaman perubahan password
+        $_SESSION['confirm_password'] = true;
+        $_SESSION['id_user'] = $id_user;
+        echo "<script>
+            window.location.href = 'index.php?page=user&act=change-Password&alert=passConf&id=" . htmlspecialchars($id_user) . "';
+        </script>";
     } else {
-        $error = $crudUser->getError();
+        // Jika password salah, arahkan dengan parameter alert=err3
+        echo "<script>
+            window.location.href = 'index.php?page=user&act=confirm-Password&id=" . htmlspecialchars($id_user) . "&alert=err3';
+        </script>";
     }
 }
-
 ?>
 
-<div class="section-header">
-    <h1>Change Password</h1>
-</div>
 
-<?php
-if (isset($error)) {
-    echo "";
-}
+<div class="main-content" style="padding-left: 0px; padding-right:0;">
+    <div class="section">
+        <div class="section-header" style="margin-left:0px; margin-right:0px; margin-bottom:6rem; border-radius: 10px;">
+            <h1>Ganti Password</h1>
+        </div>
 
-?>
+        <?php
+        if (isset($error)) {
+            echo "";
+        }
 
-<div class="row">
-    <div class="card">
-        <form method="POST">
-            <div class="card-body">
+        ?>
 
-                <div class="">
-                    <p>
-                        Confirm Your Old Password, Before Change Your Password
-                    </p>
-                </div>
-                <div class="col-20 col-md-16 col-lg-18">
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label for="password">Password</label>
-                            <input id="password" type="password" class="form-control" name="password" autocomplete="off" placeholder="Confirm Password" required>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="card">
+                <form method="POST">
+                    <div class="card-body">
+                        <div class="h5 font-weight-bold text-center">
+                            <p>
+                                Konfirmasi Password Lama Kamu, Sebelum Mengganti Password Baru
+                            </p>
+                        </div>
+                        <div class="col-20 col-md-16 col-lg-18">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="password">Password</label>
+                                    <input id="password" type="password" class="form-control" name="password" autocomplete="off" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="confirm">
+                                Confirm Password
+                            </button>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" name="confirm">
-                        Confirm Password
-                    </button>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
