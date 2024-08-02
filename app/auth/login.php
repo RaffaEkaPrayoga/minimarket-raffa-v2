@@ -57,6 +57,15 @@ if (isset($_POST["login"])) {
                 timer: 2500
               });
             <?php
+            } else if ($_GET['alert'] == "successLogout") {
+            ?>
+              Swal.fire({
+                icon: 'success',
+                title: 'Logout Berhasil',
+                showConfirmButton: false,
+                timer: 2500
+              });
+            <?php
             } else if ($_GET['alert'] == "err1") {
             ?>
               Swal.fire({
