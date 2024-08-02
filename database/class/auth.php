@@ -33,7 +33,7 @@ class Auth
         }
 
         try {
-            $this->cekUsername($username);
+            $this->cekUsernameDanNama($username, $nama);
 
             // Enkripsi password
             $hashPasswd = password_hash($password, PASSWORD_DEFAULT);
@@ -123,17 +123,58 @@ class Auth
     }
 
     // Cek apakah username sudah ada
-    private function cekUsername($username)
+    public function cekUsernameDanNama($username, $nama)
     {
         try {
-            $stmt = $this->db->prepare("SELECT id FROM user WHERE username = :username");
+            $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username AND nama = :nama");
             $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":nama", $nama);
             $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                throw new Exception("Username sudah digunakan!");
+            $stmt->fetch();
+            if ($stmt->rowCount()  > 0) {
+                echo "Yo";
+                return true;
+            } else {
+                echo "Oi";
+                return false;
             }
         } catch (PDOException $e) {
-            $this->error = $e->getMessage();
+            echo $e->getMessage();
+        }
+    }
+
+    public function forgotPassword($username, $nama, $password)
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username AND nama = :nama");
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":nama", $nama);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) {
+                $this->NewPassword($username, $nama, $password);
+                echo "<script>window.location = 'index.php?auth=forget&alert=pass';</script>";
+            } else {
+                echo "<script>window.location = 'index.php?auth=forget&alert=errPass';</script>";
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function NewPassword($username, $nama, $password)
+    {
+        try {
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $this->db->prepare("UPDATE user SET password = :password WHERE username = :username AND nama = :nama");
+            $stmt->bindParam(":password", $hash);
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":nama", $nama);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
 
