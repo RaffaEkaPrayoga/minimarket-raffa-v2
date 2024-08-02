@@ -11,7 +11,7 @@ $user = Auth::getInstance($pdo);
                 $nama = htmlspecialchars(trim($_POST["nama"]));
                 $passConf = htmlspecialchars(trim($_POST["passConf"]));
                 $alamat = htmlspecialchars(trim($_POST["alamat"]));
-                $level = 'user'; // Sesuaikan dengan level yang diinginkan
+                $level = 3;
 
                 // Memeriksa apakah ada kolom yang kosong
                 if (empty($username) || empty($password) || empty($nama) || empty($passConf) || empty($alamat)) {
