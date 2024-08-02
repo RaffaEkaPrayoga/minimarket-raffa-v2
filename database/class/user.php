@@ -57,7 +57,7 @@ class user
     }
 
 
-    public function update($id, $nama, $username, $alamat, $not_tlp, $level)
+    public function update($id, $nama, $username, $alamat, $level)
     {
         try {
 
@@ -109,7 +109,7 @@ class user
     public function resetPassword($id, $password)
     {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM user WHERE id_userid = :id");
+            $stmt = $this->db->prepare("SELECT * FROM user WHERE id = :id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
             $data = $stmt->fetch(PDO::FETCH_ASSOC);

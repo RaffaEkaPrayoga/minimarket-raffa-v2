@@ -19,6 +19,9 @@ switch ($page) {
     case 'change-Password':
         include('changePassword.php');
         break;
+    case 'confirm-Password':
+        include('confirmPassword.php');
+        break;
     default:
         include('index.php');
 }
