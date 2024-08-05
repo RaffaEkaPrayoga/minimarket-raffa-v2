@@ -13,36 +13,38 @@ if (isset($_POST['cari'])) {
 $rows = $paging->getData(@$key, 'nama_kategori');
 $pages = $paging->getPageNumber();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['addkategori'])) {
-        $namaKategori = htmlspecialchars($_POST['nama_kategori']);
-        if (empty($namaKategori)) {
-            echo '<script>window.location="index.php?page=kategori&alert=err1"</script>';
-        } else {
-            $kategori->tambahKategori($namaKategori);
-            echo "<script>window.location = 'index.php?page=kategori&alert=success1';</script>";
+if ($currentUser['level'] != 3) { 
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['addkategori'])) {
+            $namaKategori = htmlspecialchars($_POST['nama_kategori']);
+            if (empty($namaKategori)) {
+                echo '<script>window.location="index.php?page=kategori&alert=err1"</script>';
+            } else {
+                $kategori->tambahKategori($namaKategori);
+                echo "<script>window.location = 'index.php?page=kategori&alert=success1';</script>";
+            }
+            exit();
+        } elseif (isset($_POST['update'])) {
+            $idKategori = htmlspecialchars($_POST['idkategori']);
+            $namaKategori = htmlspecialchars($_POST['nama_kategori']);
+            if (empty($idKategori) || empty($namaKategori)) {
+                echo '<script>window.location="index.php?page=kategori&alert=err1"</script>';
+            } else {
+                $kategori->updateKategori($idKategori, $namaKategori);
+                echo "<script>window.location = 'index.php?page=kategori&alert=success2';</script>";
+            }
+            exit();
         }
-        exit();
-    } elseif (isset($_POST['update'])) {
-        $idKategori = htmlspecialchars($_POST['idkategori']);
-        $namaKategori = htmlspecialchars($_POST['nama_kategori']);
-        if (empty($idKategori) || empty($namaKategori)) {
-            echo '<script>window.location="index.php?page=kategori&alert=err1"</script>';
-        } else {
-            $kategori->updateKategori($idKategori, $namaKategori);
-            echo "<script>window.location = 'index.php?page=kategori&alert=success2';</script>";
-        }
+    }
+
+    if (isset($_GET['hapus'])) {
+        $idKategori = htmlspecialchars($_GET['hapus']);
+        $kategori->hapusKategori($idKategori);
+        echo "<script>window.location = 'index.php?page=kategori&alert=hapus';</script>";
         exit();
     }
 }
-
-if (isset($_GET['hapus'])) {
-    $idKategori = htmlspecialchars($_GET['hapus']);
-    $kategori->hapusKategori($idKategori);
-    echo "<script>window.location = 'index.php?page=kategori&alert=hapus';</script>";
-    exit();
-}
-
 $kategoriData = $kategori->bacaKategori();
 
 ob_end_flush();
@@ -104,8 +106,8 @@ ob_end_flush();
                                         <th>No.</th>
                                         <th>Nama Kategori</th>
                                         <th>Qty</th>
-                                        <th>Tanggal</th>
                                         <?php if ($currentUser['level'] != 3) { ?>
+                                        <th>Tanggal</th>
                                             <th>Opsi</th>
                                         <?php } ?>
                                     </tr>
@@ -120,8 +122,8 @@ ob_end_flush();
                                             <td><?php echo $no++ ?></td>
                                             <td><?php echo htmlspecialchars($d['nama_kategori']) ?></td>
                                             <td><?php echo ribuan($kategori->countProdukByKategori($idKategori)); ?></td>
-                                            <td><?php echo htmlspecialchars($d['tgl_dibuat']) ?></td>
                                             <?php if ($currentUser['level'] != 3) { ?>
+                                            <td><?php echo htmlspecialchars($d['tgl_dibuat']) ?></td>
                                                 <td>
                                                     <a href="index.php?page=kategori&edit=<?php echo $idKategori ?>" class="btn btn-primary btn-xs">
                                                         <i class="fa fa-pen fa-xs mr-1"></i>Edit
