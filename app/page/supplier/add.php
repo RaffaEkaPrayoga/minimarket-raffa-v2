@@ -1,10 +1,10 @@
 <?php
-$pdo = Koneksi::connect();
-
 if ($currentUser['level'] != 1) {
   echo "<script>window.location = 'index.php?alert=err2';</script>";
   exit;
 }
+
+$pdo = Koneksi::connect();
 
 if (isset($_POST["submit"])) {
   $nama_supplier = htmlspecialchars($_POST['nama_supplier']);

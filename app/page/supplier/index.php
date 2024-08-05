@@ -1,4 +1,10 @@
 <?php
+if ($currentUser['level'] != 1) {
+  echo "<script>
+       window.location = 'index.php?alert=err2';
+    </script>";
+  exit;
+}
 
 $pdo = Koneksi::connect();
 
@@ -11,12 +17,7 @@ if (isset($_POST['cari'])) {
 $suppliers = $paging->getData(@$key, 'nama_supplier');
 $pages = $paging->getPageNumber();
 
-if ($currentUser['level'] != 1) {
-  echo "<script>
-       window.location = 'index.php?alert=err2';
-    </script>";
-  exit;
-} ?>
+ ?>
 
 <!-- Main Content -->
 <div class="main-content" style="padding-left: 0px; padding-right:0;">
