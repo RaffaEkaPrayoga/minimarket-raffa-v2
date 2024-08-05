@@ -1,17 +1,14 @@
 <?php
+if ($currentUser['level'] === 3) {
+    echo "<script>
+    window.location = 'index.php?alert=err2';
+</script>";
+    exit;
+}
+
 include "../database/class/transaksi.php";
 $pdo = Koneksi::connect();
 $transaksi = Transaksi::getInstance($pdo);
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-if ($currentUser['level'] != 1) {
-    echo "<script>window.location = 'index.php?alert=err2';</script>";
-    exit;
-}
 
 // Menangani formulir jika disubmit
 if (isset($_POST["submit"])) {
