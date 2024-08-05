@@ -1,3 +1,12 @@
+<?php
+    if ($currentUser['level'] != 1) {
+        echo "<script>
+        window.location = 'index.php?alert=err2';
+    </script>";
+        exit;
+    }
+?>
+
 <!-- Main Content -->
 <div class="main-content" style="padding-left: 0px; padding-right:0;">
     <div class="section">
