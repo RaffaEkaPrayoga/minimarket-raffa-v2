@@ -4,36 +4,36 @@ require_once "../database/koneksi.php";
 $pdo = Koneksi::connect();
 $user = Auth::getInstance($pdo);
 
-            if (isset($_POST["regis"])) {
-                // Mendapatkan dan menyaring input
-                $username = htmlspecialchars(trim($_POST["username"]));
-                $password = htmlspecialchars(trim($_POST["password"]));
-                $nama = htmlspecialchars(trim($_POST["nama"]));
-                $passConf = htmlspecialchars(trim($_POST["passConf"]));
-                $alamat = htmlspecialchars(trim($_POST["alamat"]));
-                $level = 3;
+if (isset($_POST["regis"])) {
+    // Mendapatkan dan menyaring input
+    $username = htmlspecialchars(trim($_POST["username"]));
+    $password = htmlspecialchars(trim($_POST["password"]));
+    $nama = htmlspecialchars(trim($_POST["nama"]));
+    $passConf = htmlspecialchars(trim($_POST["passConf"]));
+    $alamat = htmlspecialchars(trim($_POST["alamat"]));
+    $level = 3;
 
-                // Memeriksa apakah ada kolom yang kosong
-                if (empty($username) || empty($password) || empty($nama) || empty($passConf) || empty($alamat)) {
-                    header("Location: index.php?auth=register&alert=err1");
-                    exit();
-                }
+    // Memeriksa apakah ada kolom yang kosong
+    if (empty($username) || empty($password) || empty($nama) || empty($passConf) || empty($alamat)) {
+        header("Location: index.php?auth=register&alert=err1");
+        exit();
+    }
 
-                // Memeriksa apakah password dan konfirmasi password cocok
-                if ($password !== $passConf) {
-                    header("Location: index.php?auth=register&alert=err2");
-                    exit();
-                }
+    // Memeriksa apakah password dan konfirmasi password cocok
+    if ($password !== $passConf) {
+        header("Location: index.php?auth=register&alert=err2");
+        exit();
+    }
 
-                // Memeriksa kredensial registrasi
-                if ($user->register($nama, $username,$password, $passConf, $alamat, $level)) {
-                    header("Location: index.php?auth=register&alert=success");
-                    exit();
-                } else {
-                    header("Location: index.php?auth=register&alert=err4");
-                    exit();
-                }
-            }
+    // Memeriksa kredensial registrasi
+    if ($user->register($nama, $username, $password, $passConf, $alamat, $level)) {
+        header("Location: index.php?auth=register&alert=success");
+        exit();
+    } else {
+        header("Location: index.php?auth=register&alert=err4");
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,11 +142,25 @@ $user = Auth::getInstance($pdo);
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label for="password" class="d-block">Password</label>
-                                            <input id="password" type="password" class="form-control pwstrength" name="password" placeholder="password">
+                                            <div class="input-group">
+                                                <input id="password" type="password" class="form-control pwstrength" name="password" placeholder="password">
+                                                <div class="input-group-append">
+                                                    <button id="togglePassword1" class="btn btn-outline-secondary" type="button">
+                                                        <i id="toggleIcon1" class="fa fa-eye-slash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="password2" class="d-block">Konfirmasi Password</label>
-                                            <input id="password2" type="password" class="form-control" name="passConf" placeholder="konfirmasi password">
+                                            <div class="input-group">
+                                                <input id="password2" type="password" class="form-control" name="passConf" placeholder="konfirmasi password">
+                                                <div class="input-group-append">
+                                                    <button id="togglePassword2" class="btn btn-outline-secondary" type="button">
+                                                        <i id="toggleIcon2" class="fa fa-eye-slash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -172,6 +186,31 @@ $user = Auth::getInstance($pdo);
             </div>
         </section>
     </div>
+
+    <script>
+        document.getElementById('togglePassword1').addEventListener('click', function(e) {
+            // Toggle the type attribute
+            const password = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon1');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // Toggle the icon
+            toggleIcon.classList.toggle('fa-eye-slash');
+            toggleIcon.classList.toggle('fa-eye');
+        });
+        document.getElementById('togglePassword2').addEventListener('click', function(e) {
+            // Toggle the type attribute
+            const password = document.getElementById('password2');
+            const toggleIcon = document.getElementById('toggleIcon2');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // Toggle the icon
+            toggleIcon.classList.toggle('fa-eye-slash');
+            toggleIcon.classList.toggle('fa-eye');
+        });
+    </script>
 
     <script src="../assets/modules/jquery.min.js"></script>
     <script src="../assets/modules/popper.js"></script>

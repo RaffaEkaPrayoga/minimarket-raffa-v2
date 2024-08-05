@@ -117,8 +117,16 @@ if (isset($_POST["login"])) {
                         </a>
                       </div>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2">
+                    <div class="input-group">
+                      <input id="password" type="password" class="form-control" name="password" tabindex="2">
+                      <div class="input-group-append">
+                        <button id="togglePassword" class="btn btn-outline-secondary" type="button">
+                          <i id="toggleIcon" class="fa fa-eye-slash"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
+
 
                   <div class="form-group">
                     <button type="submit" name="login" class="btn btn-primary btn-lg btn-block" tabindex="4">
@@ -139,6 +147,20 @@ if (isset($_POST["login"])) {
       </div>
     </section>
   </div>
+
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function(e) {
+      // Toggle the type attribute
+      const password = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+
+      // Toggle the icon
+      toggleIcon.classList.toggle('fa-eye-slash');
+      toggleIcon.classList.toggle('fa-eye');
+    });
+  </script>
 
   <script src="../assets/modules/jquery.min.js"></script>
   <script src="../assets/modules/popper.js"></script>

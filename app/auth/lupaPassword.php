@@ -67,8 +67,15 @@ if (isset($_POST["reset"])) {
                                         <div class="d-block">
                                             <label for="password" class="control-label">Password Baru</label>
                                         </div>
-                                        <input id="password" type="password" class="form-control" name="password" tabindex="2">
-                                    </div>
+                                        <div class="input-group">
+                                            <input id="password" type="password" class="form-control" name="password" tabindex="2">
+                                            <div class="input-group-append">
+                                                <button id="togglePassword" class="btn btn-outline-secondary" type="button">
+                                                    <i id="toggleIcon" class="fa fa-eye-slash"></i>
+                                                </button>
+                                            </div>
+                                            </div>
+                                        </div>
 
                                     <div class="form-group">
                                         <button type="submit" name="reset" class="btn btn-primary btn-lg btn-block" tabindex="4">
@@ -91,40 +98,54 @@ if (isset($_POST["reset"])) {
     </div>
 
     <script>
+        document.getElementById('togglePassword').addEventListener('click', function(e) {
+            // Toggle the type attribute
+            const password = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // Toggle the icon
+            toggleIcon.classList.toggle('fa-eye-slash');
+            toggleIcon.classList.toggle('fa-eye');
+        });
+    </script>
+
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
-                    <?php if (isset($_GET['alert'])) { ?>
-                        switch ("<?php echo $_GET['alert']; ?>") {
-                            case "pass":
-                                Swal.fire({
-                                    icon: "success",
-                                    title: 'Berhasil Mengganti Password!',
-                                    text: 'Anda telah berhasil terdaftar. Silakan login.'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        window.location.href = 'index.php?auth=login.php';
-                                    }
-                                });
-                                break;
-                            case "errPass":
-                                Swal.fire({
-                                    icon: "error",
-                                    title: 'Nama dan Username Tidak Sesuai!',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                                break;
-                            case "err1":
-                                Swal.fire({
-                                    icon: "warning",
-                                    title: 'Mohon Mengisi Setiap Kolom!',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                                break;
-                                // Tambahkan case lain di sini jika diperlukan
-                        }
-                    <?php } ?>
-                });
+            <?php if (isset($_GET['alert'])) { ?>
+                switch ("<?php echo $_GET['alert']; ?>") {
+                    case "pass":
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Berhasil Mengganti Password!',
+                            text: 'Anda telah berhasil terdaftar. Silakan login.'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'index.php?auth=login.php';
+                            }
+                        });
+                        break;
+                    case "errPass":
+                        Swal.fire({
+                            icon: "error",
+                            title: 'Nama dan Username Tidak Sesuai!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        break;
+                    case "err1":
+                        Swal.fire({
+                            icon: "warning",
+                            title: 'Mohon Mengisi Setiap Kolom!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        break;
+                        // Tambahkan case lain di sini jika diperlukan
+                }
+            <?php } ?>
+        });
     </script>
 
     <script src="../assets/modules/jquery.min.js"></script>
