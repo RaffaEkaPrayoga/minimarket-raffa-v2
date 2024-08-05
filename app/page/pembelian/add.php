@@ -1,4 +1,9 @@
 <?php
+if ($currentUser['level'] != 1) {
+  echo "<script>window.location = 'index.php?alert=err2';</script>";
+  exit;
+}
+
 $pdo = Koneksi::connect();
 $pembelian = Pembelian::getInstance($pdo);
 
@@ -15,11 +20,6 @@ if (isset($_POST["tambah"])) {
     } else {
       echo "Gagal menambahkan pembelian.";
     }
-  }
-
-  if ($currentUser['level'] != 1) {
-    echo "<script>window.location = 'index.php?alert=err2';</script>";
-    exit;
   }
 }
 ?>
