@@ -1,11 +1,11 @@
 <?php
-$pdo = Koneksi::connect();
-$laporan = Laporan::getInstance($pdo);
-
-if ($currentUser['level'] == 3) {
+if ($currentUser['level'] === 3) {
     echo "<script>window.location = 'index.php?alert=err2';</script>";
     exit;
 }
+
+$pdo = Koneksi::connect();
+$laporan = Laporan::getInstance($pdo);
 
 $data_laporan = $laporan->getAllLaporan();
 ?>

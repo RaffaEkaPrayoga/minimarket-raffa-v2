@@ -1,11 +1,11 @@
 <?php
-$pdo = Koneksi::connect();
-$laporan = Laporan::getInstance($pdo);
-
 if ($currentUser['level'] == 3) {
     echo "<script>window.location = 'index.php?alert=err2';</script>";
     exit;
 }
+
+$pdo = Koneksi::connect();
+$laporan = Laporan::getInstance($pdo);
 
 $nota = $_GET['invoice'];
 if (!isset($_GET['invoice'])) {
@@ -34,7 +34,7 @@ $data_produk = $laporan->getProdukByNota($nota);
                     <div class="col-sm-6">
                         <h5 class="mb-4" style="margin-top: -5rem;">Invoice : <?= $nota ?></h5>
                         <br><br>
-                        <p class="small mb-0">Kasir : <?= $_SESSION['ssUser'] ?></p>
+                        <p class="small mb-0">Kasir : <?= $currentUser['nama'] ?></p>
                         <p class="small mb-0">Tanggal : <?= $detail_laporan['tgl_sub'] ?></p>
                     </div>
                     <div class="col-sm-6 mb-4">

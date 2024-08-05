@@ -1,8 +1,12 @@
 <?php
-// require_once __DIR__ . '/../vendor/autoload.php';
 require '../vendor/autoload.php';
 include '../database/class/Koneksi.php';
 include '../database/class/Laporan.php';
+
+if ($currentUser['level'] === 3) {
+    echo "<script>window.location = 'index.php?alert=err2';</script>";
+    exit;
+}
 
 // Pastikan ekstensi gd sudah diaktifkan
 if (!extension_loaded('gd')) {
@@ -115,7 +119,7 @@ $content = '
                         <div class="flex-container">
                             <div class="flex-item">
                                 <h3>Invoice : ' . $nota . '</h3>
-                                <p>Kasir : ' . $_SESSION['ssUser'] . '</p>
+                                <p>Kasir : ' . $currentUser['nama'] . '</p>
                                 <p>Tanggal : ' . $detail_laporan['tgl_sub'] . '</p>
                             </div>
                             <div class="flex-item">
