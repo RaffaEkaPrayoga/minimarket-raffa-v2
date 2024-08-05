@@ -1,22 +1,33 @@
 <?php
+if ($currentUser['level'] === 3) {
+   echo "<script>
+       window.location = 'index.php?alert=err2';
+    </script>";
+   exit;
+}
+
 $pdo = Koneksi::connect();
 
 if (isset($_POST["submit"])) {
-   $nama_pelanggan = htmlspecialchars($_POST['nama_pelanggan']);
-   $alamat_pelanggan = htmlspecialchars($_POST['alamat_pelanggan']);
-   $telepon_pelanggan = htmlspecialchars($_POST['telepon_pelanggan']);
+$nama_pelanggan = htmlspecialchars($_POST['nama_pelanggan']);
+$alamat_pelanggan = htmlspecialchars($_POST['alamat_pelanggan']);
+$telepon_pelanggan = htmlspecialchars($_POST['telepon_pelanggan']);
 
-   $pelanggan = pelanggan::getInstance($pdo);
+$pelanggan = pelanggan::getInstance($pdo);
 
-   if (empty($nama_pelanggan) || empty($alamat_pelanggan) || empty($telepon_pelanggan)) {
-      echo '<script>window.location="index.php?page=pelanggan&act=create&alert=err1"</script>';
-   } else if ($pelanggan->tambah($nama_pelanggan, $alamat_pelanggan, $telepon_pelanggan)) {
-      //untuk mendapatkan id pembeli yang terakhir kali dimasukkan
-      $id_pelanggan = $pdo->lastInsertId();
-      echo "<script>window.location.href = 'index.php?page=pelanggan&alert=success1'</script>";
-   } else {
-      echo "Gagal menambahkan pelanggan.";
-   }
+if (empty($nama_pelanggan) || empty($alamat_pelanggan) || empty($telepon_pelanggan)) {
+echo '<script>
+   window.location = "index.php?page=pelanggan&act=create&alert=err1"
+</script>';
+} else if ($pelanggan->tambah($nama_pelanggan, $alamat_pelanggan, $telepon_pelanggan)) {
+//untuk mendapatkan id pembeli yang terakhir kali dimasukkan
+$id_pelanggan = $pdo->lastInsertId();
+echo "<script>
+   window.location.href = 'index.php?page=pelanggan&alert=success1'
+</script>";
+} else {
+echo "Gagal menambahkan pelanggan.";
+}
 }
 ?>
 

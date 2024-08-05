@@ -38,10 +38,14 @@ $pages = $paging->getPageNumber();
                     </div>
                     <div class="text-right">
                         <!-- Button trigger modal -->
+                         <?php if ($currentUser['level'] != 3) { ?>
                         <a href="index.php?page=pelanggan&act=create"> <button type="button" class="btn btn-primary">
                                 Tambah Pelanggan
                             </button>
                         </a>
+                        <?php
+                         }
+                        ?>
                     </div>
                 </div>
 
@@ -53,7 +57,9 @@ $pages = $paging->getPageNumber();
                                 <th scope="col">Name</th>
                                 <th scope="col">Alamat</th>
                                 <th scope="col">No Hp</th>
-                                <th scope="col">Action</th>
+                                <?php if ($currentUser['level'] != 3) { ?>
+                                    <th scope="col">Action</th>
+                                <?php } ?>
                             </tr>
                             <?php
                             $i = 1;
@@ -64,10 +70,12 @@ $pages = $paging->getPageNumber();
                                     <td class="align-middle"><?php echo $row["nama_pelanggan"]; ?></td>
                                     <td class="align-middle"><?php echo $row["alamat_pelanggan"]; ?></td>
                                     <td class="align-middle"><?php echo $row["telepon_pelanggan"]; ?></td>
-                                    <td class="align-middle">
-                                        <a class="btn btn-primary btn-action mr-1 tombol-edit" data-toggle="tooltip" title="Edit" href='index.php?page=pelanggan&act=edit&id_pelanggan=<?php echo $row['id_pelanggan']; ?>'><i class="fas fa-pencil-alt"></i></a>
-                                        <a class="btn btn-danger btn-action tombol-hapus" data-toggle="tooltip" title="Delete" href='index.php?page=pelanggan&act=delete&id_pelanggan=<?php echo $row['id_pelanggan']; ?>' id="delete"><i class="fas fa-trash"></i></a>
-                                    </td>
+                                    <?php if ($currentUser['level'] != 3) { ?>
+                                        <td class="align-middle">
+                                            <a class="btn btn-primary btn-action mr-1 tombol-edit" data-toggle="tooltip" title="Edit" href='index.php?page=pelanggan&act=edit&id_pelanggan=<?php echo $row['id_pelanggan']; ?>'><i class="fas fa-pencil-alt"></i></a>
+                                            <a class="btn btn-danger btn-action tombol-hapus" data-toggle="tooltip" title="Delete" href='index.php?page=pelanggan&act=delete&id_pelanggan=<?php echo $row['id_pelanggan']; ?>' id="delete"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    <?php } ?>
                                 </tr>
                             <?php } ?>
                         </table>

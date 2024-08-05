@@ -1,4 +1,11 @@
 <?php
+if ($currentUser['level'] === 3) {
+   echo "<script>
+       window.location = 'index.php?alert=err2';
+    </script>";
+   exit;
+}
+
 $pdo = Koneksi::connect();
 $pelanggan = pelanggan::getInstance($pdo);
 
