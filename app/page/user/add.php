@@ -21,7 +21,7 @@ if (isset($_POST["tambah"])) {
         echo "<script>window.location.href='index.php?page=user&act=create&alert=err1';</script>";
     } else if ($password != $passConf) {
         echo "<script>window.location.href='index.php?page=user&act=create&alert=passNCof';</script>";
-    } else if ($crudUser->cekUsername($username)) {
+    } else if ($crudUser->cekUsernameDanNama($username, $nama)) {
         echo "<script>window.location.href='index.php?page=user&act=create&alert=userno';</script>";
     } else {
         if ($crudUser->tambah($nama, $username, $password, $alamat, $level)) {

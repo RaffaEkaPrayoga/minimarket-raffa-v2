@@ -7,6 +7,9 @@ switch ($page) {
     case 'create':
         include('add.php');
         break;
+    case 'read':
+        include('index.php');
+        break;
     case 'edit':
         include('edit.php');
         break;
@@ -21,6 +24,9 @@ switch ($page) {
         break;
     case 'confirm-Password':
         include('confirmPassword.php');
+        break;
+    case 'lupa-Password':
+        include('lupaPassword.php');
         break;
     default:
         include('index.php');

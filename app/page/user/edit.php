@@ -24,7 +24,7 @@ if (isset($_POST["edit"])) {
         echo "<script>
             window.location.href = 'index.php?page=user&alert=err1&act=edit&id=$id_user';
         </script>";
-    } else if ($username !== $currentUsername && $crudUser->cekUsername($username)) {
+    } else if ($username !== $currentUsername && $crudUser->cekUsernameDanNama($username, $nama)) {
         echo "<script>
             window.location.href = 'index.php?page=user&alert=userno&act=edit&id=$id_user';
         </script>";
