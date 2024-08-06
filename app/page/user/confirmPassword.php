@@ -1,15 +1,9 @@
 <?php
-if ($currentUser['level'] != 1) {
-    echo "<script>
-       window.location = 'index.php?alert=err2';
-    </script>";
-    exit;
-}
 
 $pdo = Koneksi::connect();
 $crudUser = user::getInstance($pdo);
 
-$id_user = htmlspecialchars($_GET["id"]);
+$id_user = $currentUser['id'];
 
 if (isset($_POST["confirm"])) {
     $password = htmlspecialchars($_POST["password"]);

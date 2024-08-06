@@ -1,15 +1,9 @@
 <?php
-if ($currentUser['level'] != 1) {
-    echo "<script>
-       window.location = 'index.php?alert=err2';
-    </script>";
-    exit;
-}
 
 $pdo = Koneksi::connect();
 $crudUser = user::getInstance($pdo);
 
-$id_user = htmlspecialchars($_GET["id"]);
+$id_user = $currentUser['id'];
 
 // Pengecekan session confirm_password dan id_user
 if (!isset($_SESSION['confirm_password']) || $_SESSION['confirm_password'] !== true || !isset($_SESSION['id_user']) || $_SESSION['id_user'] != $id_user) {
@@ -27,7 +21,7 @@ if (isset($_POST["reset"])) {
         // Hapus session setelah password berubah
         unset($_SESSION['confirm_password']);
         unset($_SESSION['id_user']);
-        echo "<script>window.location.href ='index.php?page=user&alert=pass'</script>";
+        echo "<script>window.location.href ='index.php?page=user&act=confirm-Password&alert=pass'</script>";
     } else {
         echo "<script>alert('Gak bisa')</script>";
     }
