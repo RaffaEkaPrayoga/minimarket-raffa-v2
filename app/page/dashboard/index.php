@@ -104,7 +104,10 @@ $dashboardFunctions = new DashboardFunctions();
                     <div class="card">
                         <div class="card-header">
                             <h4 class="mx-auto">Data Pembelian dari Pelanggan</h4>
-                            <button class="btn btn-info" id="downloadButton">PDF</button>
+                            <form method="post" action="index.php?cetak=chart" target="_blank">
+                                <input type="hidden" name="chart_data" id="chart_data">
+                                <button type="submit" class="btn btn-info" id="downloadButton">PDF</button>
+                            </form>
                         </div>
                         <div class="card-body">
                             <div class="col-lg-10 mx-auto align-items-center">
@@ -126,10 +129,6 @@ $dashboardFunctions = new DashboardFunctions();
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var {
-                jsPDF
-            } = window.jspdf;
-
             var ctx = document.getElementById("myBarChart").getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -171,18 +170,12 @@ $dashboardFunctions = new DashboardFunctions();
             });
 
             document.getElementById('downloadButton').addEventListener('click', function() {
-                console.log('Download button clicked');
                 var canvas = document.getElementById("myBarChart");
-                var imgData = canvas.toDataURL('image/jpeg', 1.0);
-                var pdf = new jsPDF();
-                pdf.setFontSize(18);
-                pdf.text('Data Pembelian Pelanggan', 20, 10);
-                pdf.addImage(imgData, 'JPEG', 15, 15, 180, 105);
-                pdf.save('chart.pdf');
+                var imgData = canvas.toDataURL('image/png');
+                document.getElementById('chart_data').value = imgData;
             });
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.6.0/jspdf.umd.min.js"></script>
 </body>
 
 </html>

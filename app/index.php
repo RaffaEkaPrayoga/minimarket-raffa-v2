@@ -29,6 +29,10 @@ if (!$user->isLoggedIn() && $user->isLoggedIn() == false) {
         case 'struk':
             include 'page/laporan/print-laporan.php';
     }
+    switch ($cetak) {
+        case 'chart':
+            include 'page/dashboard/print-chart.php';
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
