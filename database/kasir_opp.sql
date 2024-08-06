@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2024 at 12:03 PM
+-- Generation Time: Aug 06, 2024 at 04:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,10 +38,11 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`idkategori`, `nama_kategori`, `tgl_dibuat`) VALUES
-(1, 'shampo', '2024-07-26 02:26:39'),
-(2, 'mie instan', '2023-11-25 10:18:37'),
-(3, 'minuman', '2023-11-25 10:44:56'),
-(4, 'minyak goreng', '2023-12-02 10:03:05');
+(1, 'Shampoo', '2024-07-30 03:42:28'),
+(2, 'Mie Instan', '2024-07-30 03:42:09'),
+(3, 'Minuman', '2024-07-30 03:42:00'),
+(4, 'Minyak Goreng', '2024-07-30 03:41:53'),
+(8, 'Buah', '2024-07-30 03:41:42');
 
 -- --------------------------------------------------------
 
@@ -55,13 +56,6 @@ CREATE TABLE `keranjang` (
   `idproduk` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `keranjang`
---
-
-INSERT INTO `keranjang` (`idcart`, `no_nota`, `idproduk`, `quantity`) VALUES
-(39, '', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -88,7 +82,13 @@ INSERT INTO `laporan` (`id_laporan`, `no_nota`, `id_pelanggan`, `catatan`, `tota
 (1, 'AD912231123001', 6, 'Terima Kasih', 3000, 5000, 2000, '2023-12-09 04:31:13'),
 (2, 'AD912231130231', 3, 'Terima Kasih', 29000, 30000, 1000, '2023-12-09 04:30:35'),
 (3, 'AD912231132303', 1, 'Terima Kasih', 16000, 20000, 4000, '2023-12-09 04:33:00'),
-(4, 'AD912231145324', 2, 'Terima Kasih', 23000, 25000, 2000, '2023-12-09 04:45:50');
+(4, 'AD912231145324', 2, 'Terima Kasih', 23000, 25000, 2000, '2023-12-09 04:45:50'),
+(6, 'AD18241013454', 1, 'Terima Kasih', 24000, 30000, 6000, '2024-08-01 08:13:36'),
+(7, 'AD18241016454', 11, 'Terima Kasih', 20000, 20000, 0, '2024-08-01 08:16:50'),
+(8, 'AD18241130454', 6, 'Terima Kasih', 13000, 15000, 2000, '2024-08-01 09:30:25'),
+(9, 'AD18241150454', 1, 'Terima Kasih', 20000, 20000, 0, '2024-08-01 09:50:32'),
+(10, 'AD18241152454', 2, 'Terima Kasih', 16000, 20000, 4000, '2024-08-01 09:52:39'),
+(11, 'AD4824531454', 11, 'Terima Kasih', 16000, 20000, 4000, '2024-08-04 03:31:32');
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,18 @@ INSERT INTO `nota` (`idnota`, `no_nota`, `idproduk`, `quantity`) VALUES
 (5, 'AD912231132303', 5, 1),
 (6, 'AD912231145324', 1, 1),
 (7, 'AD912231145324', 2, 1),
-(8, 'AD912231145324', 5, 1);
+(8, 'AD912231145324', 5, 1),
+(40, 'AD18241003454', 5, 1),
+(41, 'AD18241003454', 1, 2),
+(49, 'AD18241013454', 5, 1),
+(50, 'AD18241013454', 1, 2),
+(52, 'AD18241016454', 1, 1),
+(53, 'AD18241016454', 5, 1),
+(55, 'AD18241130454', 2, 1),
+(56, 'AD18241130454', 13, 1),
+(58, 'AD18241150454', 13, 2),
+(59, 'AD18241152454', 5, 1),
+(60, 'AD4824531454', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -139,8 +150,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `telepon_pelanggan`, 
 (2, 'Diwa', '081234766545', 'Jalan Teratai'),
 (3, 'Melani', '084676543457', 'Jalan Rafflesia'),
 (6, 'Merlin', '083296532890', 'Jalan Amal'),
-(7, 'Arya', '089966778855', 'Jalan Amal'),
-(8, 'Abyan', '081277665553', 'Jalan Delima');
+(11, 'Raffa', '08127723443', 'Jalan Karya');
 
 -- --------------------------------------------------------
 
@@ -179,18 +189,21 @@ CREATE TABLE `produk` (
   `harga_modal` int(11) NOT NULL,
   `harga_jual` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
-  `tgl_input` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `tgl_input` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `gambar` varchar(255) DEFAULT 'default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`idproduk`, `idkategori`, `kode_produk`, `nama_produk`, `harga_modal`, `harga_jual`, `stock`, `tgl_input`) VALUES
-(1, 2, 'BRG001', 'Indomie', 3000, 4000, 90, '2023-12-09 04:44:42'),
-(2, 1, 'BRG002', 'Lifeboy', 2000, 3000, 54, '2023-12-09 14:48:07'),
-(5, 4, 'BRG003', 'Minyak Kita', 14000, 16000, 50, '2023-12-09 04:45:02'),
-(7, 3, 'BRG004', 'Teh Gelas', 1000, 2000, 100, '2024-07-26 02:47:18');
+INSERT INTO `produk` (`idproduk`, `idkategori`, `kode_produk`, `nama_produk`, `harga_modal`, `harga_jual`, `stock`, `tgl_input`, `gambar`) VALUES
+(1, 2, 'BRG001', 'Indomie', 3000, 4000, 87, '2024-08-05 07:09:50', '66b07abee8233.png'),
+(2, 1, 'BRG002', 'Lifeboy', 2000, 3000, 54, '2024-08-05 07:10:10', '66b07ad2390a3.png'),
+(5, 4, 'BRG003', 'Minyak Kita', 14000, 16000, 46, '2024-08-05 07:12:44', '66b07b6cab24b.png'),
+(7, 3, 'BRG004', 'Teh Gelas', 1000, 2000, 100, '2024-08-05 07:11:29', '66b07b21ba4bc.png'),
+(13, 8, 'BRG005', 'Apel', 5000, 10000, 47, '2024-08-05 07:12:58', '66b07b7a29703.png'),
+(19, 3, 'BRG006', 'Golda Coffee', 3000, 5000, 50, '2024-08-06 01:47:31', '66b07b8a2d36e.png');
 
 -- --------------------------------------------------------
 
@@ -213,8 +226,7 @@ INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `telepon_supplier`, `ala
 (1, 'Rangga', '0864456784248', 'Jalan Merpati'),
 (2, 'Rian Deo', '0893243565343', 'Jalan Tamtama'),
 (9, 'Fathir', '0834567845547', 'Jalan Mawar'),
-(12, 'Reza', '0876445699675', 'Jalan Karya'),
-(14, 'Udin', '08127723443', 'Jalan Keramat');
+(12, 'Reza', '0876445699675', 'Jalan Karya');
 
 -- --------------------------------------------------------
 
@@ -237,8 +249,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nama`, `alamat`, `username`, `password`, `level`) VALUES
 (1, 'Raffa Eka Prayoga', 'Jalan Bakti', 'SuperAdmin', '$2y$10$kLYaluLEySs0SERg2axEFuzXSKbQKKUCDBmCN2dip08bsbt5tiUy2', 1),
-(2, 'Reihan Firmansyah', 'Jalan Mawar', 'Admin', '$2y$10$NbOT/DTFWKqeVItOhO4HhO.TZWeeFriUSuftSMLG99Ep7UIt0Rcje', 2),
-(3, 'Rian Deo', 'Jalan Mawar', 'User', '$2y$10$cGhZGXLAIQe7M3WvN0jfyuOvoRXQxeLbk2qXzfNORVLsEJJXAW/gC', 3);
+(2, 'Reihan Firmansyah', 'Jalan Mawar', 'Admin', '$2y$10$G5VsUituhNuo1zbetoXNqu3WaiqtVmMvp4Uo96vK4GIVUYhn3XQJu', 2),
+(3, 'Rian Deo', 'Jalan Patin', 'User', '$2y$10$EgRUOf3DTCW/0p5N8atoOuvKHceP./6oJj7SMBeBVZNqjE2/gkkCC', 3),
+(17, 'Reihan', 'Jalan Riau', 'reihan', '$2y$10$6NvVA4wwu2UGjika0wF5SehSmMtjCbqkpGONe2yy6Z6k4b83GD.JC', 3),
+(25, 'Geo', 'Jalan Dutamas', 'gek', '$2y$10$Yvl2zgBD8LgseWa7VqIzMuRwey3JDnrYE1YoevN4HQKTCA8.li/n.', 3);
 
 --
 -- Indexes for dumped tables
@@ -312,55 +326,55 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `idkategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idkategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `idcart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idcart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `idnota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idnota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `idproduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idproduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
