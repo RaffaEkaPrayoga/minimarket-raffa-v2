@@ -3,14 +3,24 @@
 $pdo = Koneksi::connect();
 $crudUser = user::getInstance($pdo);
 
-$id_user = $currentUser['id'];
+$id_user = isset($_GET['id']) ? $_GET['id'] : null;
+$level_user = $currentUser['level']; // Mengambil level user dari data user saat ini
 
-// Pengecekan session confirm_password dan id_user
-if (!isset($_SESSION['confirm_password']) || $_SESSION['confirm_password'] !== true || !isset($_SESSION['id_user']) || $_SESSION['id_user'] != $id_user) {
-    echo "<script>
-        window.location.href = 'index.php?page=user&act=confirm-Password&id={$id_user}&alert=err2';
-    </script>";
-    exit();
+// Pengecekan level user
+if ($level_user != 1) {
+    // Jika bukan superadmin, gunakan id dari session
+    $id_user = $currentUser['id'];
+
+    // Pengecekan session confirm_password dan id_user
+    if (
+        !isset($_SESSION['confirm_password']) || $_SESSION['confirm_password'] !== true ||
+        !isset($_SESSION['id_user']) || $_SESSION['id_user'] != $id_user
+    ) {
+        echo "<script>
+            window.location.href = 'index.php?page=user&act=confirm-Password&id={$id_user}&alert=err2';
+        </script>";
+        exit();
+    }
 }
 
 // Proses reset password

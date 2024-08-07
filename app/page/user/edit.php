@@ -88,9 +88,9 @@ extract($crudUser->getID($id_user));
                                     Edit
                                 </button>
                                 <br>
-                                <!-- <div class="text-center">
-                                    <a href="index.php?page=user&act=confirm-Password&id=<?= $id_user ?>">Change Password</a>
-                                </div> -->
+                                <div class="text-center">
+                                    <a href="index.php?page=user&act=change-Password&id=<?= $id_user ?>">Ganti Password User</a>
+                                </div>
                             </div>
                         </div>
                     </form>
