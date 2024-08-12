@@ -31,6 +31,7 @@ if (isset($_POST["reset"])) {
     <link rel="stylesheet" href=".../assets/modules/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href=".../assets/css/components.css">
+    <link rel="shortcut icon" href="../assets/img/Keranjang.png" type="image/x-icon">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -74,8 +75,8 @@ if (isset($_POST["reset"])) {
                                                     <i id="toggleIcon" class="fa fa-eye-slash"></i>
                                                 </button>
                                             </div>
-                                            </div>
                                         </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <button type="submit" name="reset" class="btn btn-primary btn-lg btn-block" tabindex="4">

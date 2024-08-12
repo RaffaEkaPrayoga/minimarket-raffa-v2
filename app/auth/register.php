@@ -48,6 +48,7 @@ if (isset($_POST["regis"])) {
     <link rel="stylesheet" href="../assets/modules/jquery-selectric/selectric.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="shortcut icon" href="../assets/img/Keranjang.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {

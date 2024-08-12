@@ -37,6 +37,7 @@ if (isset($_POST["login"])) {
   <link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="shortcut icon" href="../assets/img/Keranjang.png" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
 </head>
 

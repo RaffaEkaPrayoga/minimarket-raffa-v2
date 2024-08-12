@@ -41,6 +41,7 @@ if (!$user->isLoggedIn() && $user->isLoggedIn() == false) {
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
         <title>Minimarket Raffa</title>
+        <link rel="shortcut icon" href="../assets/img/Keranjang.png" type="image/x-icon">
         <?php
         include 'layout/stylecss.php';
         ?>
@@ -86,7 +87,7 @@ if (!$user->isLoggedIn() && $user->isLoggedIn() == false) {
                         case 'supplier':
                             include('page/supplier/default.php');
                             break;
-                            
+
                         case 'pembelian':
                             include('page/pembelian/default.php');
                             break;
@@ -102,7 +103,7 @@ if (!$user->isLoggedIn() && $user->isLoggedIn() == false) {
                         case 'dashboard':
                             include('page/dashboard/index.php');
                             break;
-                            
+
                         default:
                             include('page/dashboard/index.php');
                     }
