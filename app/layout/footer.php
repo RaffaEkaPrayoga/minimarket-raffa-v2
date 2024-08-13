@@ -45,6 +45,14 @@
             showConfirmButton: false,
             timer: 3000
         });
+    <?php } elseif (isset($_GET['alert']) && $_GET['alert'] == "err4") { ?>
+        Swal.fire({
+            icon: "error",
+            title: 'Uang Anda Kurang',
+            text: 'Masukkan Nominal Uang yang Sesuai!',
+            showConfirmButton: false,
+            timer: 3000
+        });
     <?php } elseif (isset($_GET['alert']) && $_GET['alert'] == "hapus") { ?>
         Swal.fire({
             icon: "success",

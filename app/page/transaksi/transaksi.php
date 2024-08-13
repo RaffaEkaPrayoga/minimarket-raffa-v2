@@ -27,7 +27,10 @@ if (isset($_POST["submit"])) {
         echo '<script>alert("Inputan harus berupa angka");</script>';
     } else {
         // Simpan transaksi
-        if ($transaksi->saveTransaction($nonota, $idpell, $totalbeli, $pembayaran, $kembalian, $catatan)) {
+        if ($pembayaran <= $totalbeli){
+            echo '<script>window.location="index.php?page=transaksi&alert=err4"</script>';
+        }
+        else if ($transaksi->saveTransaction($nonota, $idpell, $totalbeli, $pembayaran, $kembalian, $catatan)) {
             // Redirect setelah menyimpan
             echo '<script>window.location.href = "index.php?page=laporan&act=detail&alert=success1&invoice=' . $nonota . '"</script>';
         } else {
