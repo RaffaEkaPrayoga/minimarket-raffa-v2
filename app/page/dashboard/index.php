@@ -34,7 +34,7 @@ $dashboardFunctions = new DashboardFunctions();
 <body>
     <div class="main-content">
         <section class="section col-lg-12">
-            <div class="section-header mb-4">
+            <div class="section-header" style="margin-left:-35px; margin-right:-35px; border-radius: 10px;">
                 <h1>Dashboard</h1>
             </div>
             <div class="row">
@@ -48,7 +48,7 @@ $dashboardFunctions = new DashboardFunctions();
                                 <h4>Total Pelanggan</h4>
                             </div>
                             <div class="card-body">
-                                <?php echo $dashboardFunctions->getTotalPelanggan(); ?>
+                                <span style="font-size: 19px;"><?php echo $dashboardFunctions->getTotalPelanggan(); ?></span>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ $dashboardFunctions = new DashboardFunctions();
                                 <h4>Product Terjual</h4>
                             </div>
                             <div class="card-body">
-                                <?php echo $dashboardFunctions->getTotalProductTerjual(); ?>
+                                <span style="font-size: 19px;"><?php echo $dashboardFunctions->getTotalProductTerjual(); ?></span>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ $dashboardFunctions = new DashboardFunctions();
                                 <h4>Hasil yang didapat</h4>
                             </div>
                             <div class="card-body">
-                                Rp.<?php echo $dashboardFunctions->ribuan($dashboardFunctions->getHasilDidapat()); ?>
+                                <span style="font-size: 19px;">Rp.<?php echo $dashboardFunctions->ribuan($dashboardFunctions->getHasilDidapat()); ?></span>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ $dashboardFunctions = new DashboardFunctions();
                                 <h4>Total Penjualan</h4>
                             </div>
                             <div class="card-body">
-                                Rp.<?php echo $dashboardFunctions->ribuan($dashboardFunctions->getTotalPenjualan()); ?>
+                                <span style="font-size: 19px;">Rp.<?php echo $dashboardFunctions->ribuan($dashboardFunctions->getTotalPenjualan()); ?></span>
                             </div>
                         </div>
                     </div>
