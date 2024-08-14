@@ -8,7 +8,7 @@ switch ($page) {
         include('add.php');
         break;
     case 'read':
-        include('index.php');
+        include('page/user/index.php');
         break;
     case 'edit':
         include('edit.php');
@@ -29,5 +29,5 @@ switch ($page) {
         include('lupaPassword.php');
         break;
     default:
-        include('index.php');
+        include('page/user/index.php');
 }

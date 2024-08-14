@@ -14,5 +14,5 @@ switch ($page) {
         include('page/pembelian/hapus.php');
         break;
     default:
-        include('index.php');
+        include('page/pembelian/index.php');
 }

@@ -14,5 +14,5 @@ switch ($page) {
         include('page/pelanggan/hapus.php');
         break;
     default:
-        include('index.php');
+        include('page/pelanggan/index.php');
 }

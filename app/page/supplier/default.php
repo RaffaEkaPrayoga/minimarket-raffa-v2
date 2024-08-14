@@ -14,5 +14,5 @@ switch ($page) {
         include('page/supplier/hapus.php');
         break;
     default:
-        include('index.php');
+        include('page/supplier/index.php');
 }
