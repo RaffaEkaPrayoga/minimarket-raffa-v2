@@ -21,19 +21,14 @@ class Auth
     }
 
     // Fungsi untuk registrasi user
-    public function register($nama, $username, $password, $passConf, $alamat, $level)
+    
+    public function register($nama, $username, $password, $alamat, $level)
     {
-        if (empty($nama) || empty($username) || empty($password) || empty($passConf) || empty($alamat)) {
-            header("Location: index.php?auth=register&alert=err1");
-            exit();
-        }
-        if ($password !== $passConf) {
-            header("Location: index.php?auth=register&alert=err2");
-            exit();
-        }
-
+        $level = 3;
         try {
-            $this->cekUsernameDanNama($username, $nama);
+            if ($this->cekUsernameDanNama($username, $nama)) {
+                return false;
+            }
 
             // Enkripsi password
             $hashPasswd = password_hash($password, PASSWORD_DEFAULT);
@@ -126,7 +121,7 @@ class Auth
     public function cekUsernameDanNama($username, $nama)
     {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username AND nama = :nama");
+            $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username OR nama = :nama");
             $stmt->bindParam(":username", $username);
             $stmt->bindParam(":nama", $nama);
             $stmt->execute();

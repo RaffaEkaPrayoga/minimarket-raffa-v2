@@ -11,22 +11,17 @@ if (isset($_POST["regis"])) {
     $nama = htmlspecialchars(trim($_POST["nama"]));
     $passConf = htmlspecialchars(trim($_POST["passConf"]));
     $alamat = htmlspecialchars(trim($_POST["alamat"]));
-    $level = 3;
 
     // Memeriksa apakah ada kolom yang kosong
     if (empty($username) || empty($password) || empty($nama) || empty($passConf) || empty($alamat)) {
         header("Location: index.php?auth=register&alert=err1");
         exit();
-    }
-
-    // Memeriksa apakah password dan konfirmasi password cocok
-    if ($password !== $passConf) {
+    } else if ($password !== $passConf) {
         header("Location: index.php?auth=register&alert=err2");
         exit();
-    }
-
-    // Memeriksa kredensial registrasi
-    if ($user->register($nama, $username, $password, $passConf, $alamat, $level)) {
+    } else if ($user->cekUsernameDanNama($username, $nama)) {
+        header("Location: index.php?auth=register&alert=err3");
+    } else if ($user->register($nama, $username, $password, $alamat, $level)) {
         header("Location: index.php?auth=register&alert=success");
         exit();
     } else {
